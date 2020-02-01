@@ -44,7 +44,7 @@ router.put("/api/burgers/:id", function(req, res){
 //adding new value
   burger.update(
       {
-          eaten: request.body.eaten
+          devoured: request.body.devoured
       },
       condition,
       function(result){
@@ -60,7 +60,7 @@ router.put("/api/burgers/:id", function(req, res){
 
 router.delete(condition, function(res){
     if (result.affectedRows == 0){
-        return response.status(404)
+        return response.status(404).end();
     }else {
         repsonse.status(200).end();
     };
