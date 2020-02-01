@@ -5,6 +5,8 @@ const router = express.Router();
 //getting the model to use db
 const burger=require("../models/burger");
 
+
+//create routes and logic
 router.get("/", function(req, res) {
     burger.all(function(data){
         let burgerOb = {
