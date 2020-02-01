@@ -16,18 +16,55 @@ router.get("/", function(req, res) {
 });
 
 router.get("/api/burgers", function(req,res) {
-    burger.all
-})
+    burger.all(function(data){
+        let burgerOb ={
+            bugers: data
+        };
+        response.json(burgerOb);
+    });
+});
 
-router.post
+router.post("/api/burgers", function(req, resp){
+    burger.create(
+        ["burgerType", "burgerToppings"],
+        [request.body.burgerTypes,request.body.burgerToppings],
+        function(res){
+            response.json({ id: result.insertId });//respond with specific id of burger
+        }
+    );
+
+});
 
 
 
-router.put
+router.put("/api/burgers/:id", function(req, res){
+  let condition = "id = " + request.params.id;
+
+  console.log("condition", condition);
+//adding new value
+  burger.update(
+      {
+          eaten: request.body.eaten
+      },
+      condition,
+      function(result){
+          if (result.changedRows == 0){
+              return response.status(404).end();
+          } else {
+              response.status(200).end();
+          }
+      }
+  );
+});
 
 
-router.delete
-
+router.delete(condition, function(res){
+    if (result.affectedRows == 0){
+        return response.status(404)
+    }else {
+        repsonse.status(200).end();
+    };
+});
 
 
 
